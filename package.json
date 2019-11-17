@@ -1,0 +1,32 @@
+{
+  "name": "smartHouse(TS)",
+  "version": "1.0.0",
+  "description": "\"# smart-house-TS-\"",
+  "main": "index.js",
+  "scripts": {
+    "dev": "webpack"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Drews99/smart-house-TS-.git"
+  },
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Drews99/smart-house-TS-/issues"
+  },
+  "homepage": "https://github.com/Drews99/smart-house-TS-#readme",
+  "dependencies": {
+    "typescript": "^3.7.2",
+    "typescript-collections": "^1.3.3",
+    "webpack-dev-server": "^3.9.0"
+  },
+  "devDependencies": {
+    "@types/node": "^12.12.8",
+    "@types/webpack": "^4.41.0",
+    "copy-webpack-plugin": "^5.0.5",
+    "ts-loader": "^6.2.1",
+    "ts-node": "^8.5.2",
+    "webpack": "^4.41.2",
+    "webpack-cli": "^3.3.10"
+  }
+}
