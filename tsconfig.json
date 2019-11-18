@@ -1,6 +1,7 @@
 {
   "compilerOptions": {
     "outDir": "./dist/",
+    "experimentalDecorators": true,
     "sourceMap": true,
     "moduleResolution": "node",
     "noImplicitAny": true,

@@ -1,12 +1,9 @@
-import { DeviceInterface } from "./DeviceInterface"
+import { DeviceInterface } from "./DeviceInterface";
 import * as Collections from 'typescript-collections';
 import Dictionary from "typescript-collections/dist/lib/Dictionary";
-import { AbstractDevice } from "./AbstractDevice";
-
-
 
 export class SmartHouse<T extends DeviceInterface> {
-    public _devices = new Collections.Dictionary<string, T>();
+    private _devices = new Collections.Dictionary<string, T>();
 
     constructor() {}
 
@@ -26,8 +23,20 @@ export class SmartHouse<T extends DeviceInterface> {
         this._devices.clear();
     }
 
-    getDeviceByKey(key: string) {
+    getDeviceByKey(key: string): T {
         return this._devices.getValue(key);
+    }
+
+    everythingOn(): void {
+        for (let val of this._devices.values()) {
+            val.on();
+        }
+    }
+
+    everythingOff(): void {
+        for (let val of this._devices.values()) {
+            val.off();
+        }
     }
 }
 
