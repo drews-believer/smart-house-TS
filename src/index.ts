@@ -3,23 +3,18 @@ import { Multicooker } from "./Multicooker";
 import { SmartHouse } from "./SmartHouse";
 import {AbstractDevice} from "./AbstractDevice";
 
+
+/*this code is needed to implement the work of a smartHouse using the browser console*/
 declare global {
     interface Window {
         sh: object;
         DigitalWatch: Function;
         Multicooker: Function;
-        dw1: object;
-        dw2: object;
-        mc1: object;
-        mc2: object;
     }
 }
 
 window.sh = new SmartHouse<AbstractDevice>();
+window.DigitalWatch = DigitalWatch;
+window.Multicooker = Multicooker;
 
-console.log(window.sh);
 
-window.dw1 = new DigitalWatch("samsung");
-window.dw2 = new DigitalWatch("panasonic");
-window.mc1 = new Multicooker("redmond");
-window.mc2 = new Multicooker("foxfox");

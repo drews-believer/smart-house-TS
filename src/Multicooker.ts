@@ -1,71 +1,62 @@
 import { AbstractDevice } from "./AbstractDevice"
+import { TaskList } from "./Enums"
 
 export class Multicooker  extends AbstractDevice {
-    protected _task: null | string  = null; //a task for device
-    protected _currentTask: number = 0; //a task that is currently viewed in task list
-    protected _temperature: number = 100;
-    protected _taskList = (function() { enum taskList {  Fry, Cook, Bake, Boil } return taskList })();
+    protected task: null | string  = null;
+    protected currentTask: number = 0;
+    protected taskList: string[] = Object.keys(TaskList);
+    protected temperature: number = 100;
 
-    constructor(name: string) {
-        super(name);
+    getTasklist(): string[] {
+        return this.taskList;
     }
 
-    get tasklist(): string[]{
-        const keys = Object.keys(this._taskList).filter(k => typeof this._taskList[k as any] === "string");
-        const values = keys.map(k => this._taskList[k as any]);
-        console.log(values);
-        return values;
-    }
-
-    get task(): string {
-        if (this._task != null) {
-            return this._task;
-        } else {
-            console.log("Task is not set. Setting default task 'Fry'");
-            return this._taskList[0];
+    getTask(): string {
+        if (this.task != null) {
+            return this.task;
         }
     }
 
     setUpTask(): void {
-        this._state === true ? this._task = this._taskList[this._currentTask] : this._task = this._taskList[0];
-        console.log(this._taskList[this._currentTask]);
+        this.state === true ? this.task = this.taskList[this.currentTask] : this.task = this.taskList[0];
+        console.log(this.taskList[this.currentTask]);
     }
 
-    get currentTask() {
-        return this._taskList[this._currentTask];
+    getCurrentTask() {
+        return this.taskList[this.currentTask];
     }
 
     nextTask() {
-        return this._state === true &&
-        this._currentTask > Object.keys(this._taskList).length -1
-            ? this._currentTask
-            : ++this._currentTask;
+        return this.state === true &&
+        this.currentTask > this.taskList.length - 1
+            ? this.currentTask
+            : ++this.currentTask;
     }
 
     previousTask() {
-        return this._state === true && this._currentTask <= 0
-            ? this._currentTask
-            : --this._currentTask;
+        return this.state === true && this.currentTask <= 0
+            ? this.currentTask
+            : --this.currentTask;
     }
 
-    get temperature() {
-        return this._temperature;
+    getTemperature() {
+        return this.temperature;
     }
 
     increaseTemperature(): number{
-        return this._state === true && this._temperature >= 100
-            ? this._temperature
-            : ++this._temperature;
+        return this.state === true && this.temperature >= 100
+            ? this.temperature
+            : ++this.temperature;
     }
     decreaseTemperature(): number {
-        return this._state === true && this._temperature <= 0
-            ? this._temperature
-            : --this._temperature;
+        return this.state === true && this.temperature <= 0
+            ? this.temperature
+            : --this.temperature;
     }
 
     async setUpTaskWithTimer(str: string): Promise<void> {
         await super.timer(str, true);
-        this._task = this._taskList[this._currentTask];
+        this.task = this.taskList[this.currentTask];
         console.log("task is set");
     }
 }

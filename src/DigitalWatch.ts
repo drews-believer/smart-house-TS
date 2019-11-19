@@ -1,67 +1,64 @@
 import { AbstractDevice } from "./AbstractDevice"
-import { colors } from "./Colors"
+import { Colors } from "./Enums"
 
 export class DigitalWatch extends AbstractDevice {
-    protected _currentColor: null | string = null;
-    protected _brightness: number = 0;
-    protected _clock: null | number = null;
-
-    constructor(name: string) {
-        super(name);
-    }
+    protected currentColor: string;
+    protected colors: string[] = Object.keys(Colors);
+    protected brightness: number = 0;
+    protected clock: null | number = null;
 
     on(): void {
         super.on();
-        this._clockStart();
+        this.clockStart();
     }
 
     off(): void {
         super.off();
-        this._clockStop();
+        this.clockStop();
     }
 
-    changeColor(val: string): void {
-        for (let key in colors ) {
-            if (this.state === true && val === colors[key]) {
-                this._currentColor = val;
+    changeColor(str: string): void {
+        for (let item of this.colors) {
+            if (str === item) {
+                this.currentColor = str;
             }
         }
     }
 
-    get color(): string {
-        return this._currentColor;
+    getColor(): string {
+        return this.currentColor;
     }
 
     increaseBrightness(): void {
-        if (this._state === true && this._brightness < 10) {
-            this._brightness++;
+        if (this.state === true && this.brightness < 10) {
+            this.brightness++;
         }
     }
 
     decreaseBrightness(): void {
-        if (this._state === true && this._brightness > 0) {
-            this._brightness--;
+        if (this.state === true && this.brightness > 0) {
+            this.brightness--;
         }
     }
 
-    get brightness(): number {
-        return this._brightness;
+    getBrightness(): number {
+        return this.brightness;
     }
 
-    protected _setUpClock(): void {
+    protected setUpClock(): void {
         const dateStr: string = String(new Date());
         const regExp: RegExp = /(\w{3}\s){2}\d{2}\s\d{4}\s(\d{2}:){2}\d{2}/;
         const currentDate: string = dateStr.match(regExp)[0];
         document.getElementById("root").innerText = `Date&Time: ${currentDate}`;
     }
 
-    protected _clockStart(): void {
-        this._clock = window.setInterval(this._setUpClock, 1000);
+    protected clockStart(): void {
+        this.clock = window.setInterval(this.setUpClock, 1000);
     }
 
-    protected _clockStop(): void {
-        window.clearInterval(this._clock);
-        this._clock = null;
+    protected clockStop(): void {
+        window.clearInterval(this.clock);
+        this.clock = null;
         document.getElementById("root").innerText = ``;
     }
 }

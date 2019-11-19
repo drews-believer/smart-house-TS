@@ -8,7 +8,7 @@ export class SmartHouse<T extends DeviceInterface> {
     constructor() {}
 
     addDevice(entity:T):void {
-        this._devices.setValue(entity.name ,entity);
+        this._devices.setValue(entity.getName() ,entity);
     }
 
     deleteDevice(key:string):void {
