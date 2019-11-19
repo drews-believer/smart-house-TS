@@ -1,21 +1,25 @@
 import { DigitalWatch } from "./DigitalWatch";
 import { Multicooker } from "./Multicooker";
 import { SmartHouse } from "./SmartHouse";
+import {AbstractDevice} from "./AbstractDevice";
 
-const dw1 = new DigitalWatch("samsung");
-const dw2 = new DigitalWatch("panasonic");
-const mc1 = new Multicooker("redmond");
+declare global {
+    interface Window {
+        sh: object;
+        DigitalWatch: Function;
+        Multicooker: Function;
+        dw1: object;
+        dw2: object;
+        mc1: object;
+        mc2: object;
+    }
+}
 
-const sm = new SmartHouse<DigitalWatch | Multicooker>();
+window.sh = new SmartHouse<AbstractDevice>();
 
-sm.addDevice("samsung",dw1);
-sm.addDevice("panasonic",dw2);
-sm.addDevice("redmond",mc1);
-sm.everythingOn();
+console.log(window.sh);
 
-
-/*(sm.getDeviceByKey("samsung") as DigitalWatch).on();*/
-sm.getDeviceByKey("redmond");
-sm.deleteAllDevices();
-
-console.log(sm.allDevices);
+window.dw1 = new DigitalWatch("samsung");
+window.dw2 = new DigitalWatch("panasonic");
+window.mc1 = new Multicooker("redmond");
+window.mc2 = new Multicooker("foxfox");

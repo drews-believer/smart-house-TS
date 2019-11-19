@@ -7,15 +7,15 @@ export class SmartHouse<T extends DeviceInterface> {
 
     constructor() {}
 
-    addDevice(key:string, entity:T):void {
-        this._devices.setValue(key, entity);
+    addDevice(entity:T):void {
+        this._devices.setValue(entity.name ,entity);
     }
 
     deleteDevice(key:string):void {
         this._devices.remove(key);
     }
 
-    get allDevices(): Dictionary<string, DeviceInterface> {
+    get allDevices(): Dictionary<string, T> {
         return this._devices;
     }
 

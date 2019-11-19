@@ -7,8 +7,7 @@ export class Multicooker  extends AbstractDevice {
     protected _taskList = (function() { enum taskList {  Fry, Cook, Bake, Boil } return taskList })();
 
     constructor(name: string) {
-        super();
-        this._name = name;
+        super(name);
     }
 
     get tasklist(): string[]{
