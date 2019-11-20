@@ -11,9 +11,7 @@ export abstract class AbstractDevice implements DeviceInterface {
     }
 
     protected isValidStr(regularExp: RegExp, str: string): string {
-        const result: Array<string> = str.match(regularExp);
-        let findValue: string = result[0];
-        return findValue;
+        return str.match(regularExp)[0];
     }
 
     setName(str: string): void {
@@ -42,7 +40,7 @@ export abstract class AbstractDevice implements DeviceInterface {
         this.userTime = this.isValidStr(regExp, str);
         this.currentTime = this.takeCurrentTime();
         const convertedTime: number = this.timeConverter(this.currentTime, this.userTime);
-        await new Promise(function (resolve, reject) {
+        const promise = await new Promise(function (resolve, reject) {
             if (toggler === true) {
                 setTimeout(() => resolve("time to cook"), convertedTime);
             } else if (toggler === false) {
@@ -50,7 +48,8 @@ export abstract class AbstractDevice implements DeviceInterface {
             } else {
                 reject("Pls, put boolean data");
             }
-        }).then(result => console.log(result), error => console.log(error));
+        });
+        console.log(promise);
     }
 
     protected takeCurrentTime(): string {

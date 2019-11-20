@@ -18,11 +18,7 @@ export class DigitalWatch extends AbstractDevice {
     }
 
     changeColor(str: string): void {
-        for (let item of this.colors) {
-            if (str === item) {
-                this.currentColor = str;
-            }
-        }
+        this.currentColor = this.colors.find((elem)=>str === elem);
     }
 
     getColor(): string {
