@@ -1,9 +1,9 @@
 enum Colors {
-    White, Green , Red
+    WHITE, GREEN , RED
 }
 
 enum TaskList {
-    task1, task2, task3, task4
+    TASK1, TASK2, TASK3, TASK4
 }
 
 export {Colors, TaskList};
