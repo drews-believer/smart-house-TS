@@ -1,9 +1,9 @@
 enum Colors {
-    WHITE, GREEN , RED
+    WHITE = "White", GREEN = "Green" , RED = "Red"
 }
 
 enum TaskList {
-    TASK1, TASK2, TASK3, TASK4
+    TASK1 = "Heating", TASK2 = "Quenching", TASK3 = "Frying", TASK4 = "Steam"
 }
 
 export {Colors, TaskList};

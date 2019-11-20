@@ -3,7 +3,7 @@ import { Colors } from "./Enums"
 
 export class DigitalWatch extends AbstractDevice {
     protected currentColor: string;
-    protected colors: string[] = Object.keys(Colors);
+    protected colors: string[] = Object.values(Colors);
     protected brightness: number = 0;
     protected clock: null | number = null;
 

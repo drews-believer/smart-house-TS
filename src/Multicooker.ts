@@ -4,7 +4,7 @@ import { TaskList } from "./Enums"
 export class Multicooker  extends AbstractDevice {
     protected task: null | string  = null;
     protected currentTask: number = 0;
-    protected taskList: string[] = Object.keys(TaskList);
+    protected taskList: string[] = Object.values(TaskList);
     protected temperature: number = 100;
 
     getTasklist(): string[] {
