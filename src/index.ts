@@ -4,17 +4,12 @@ import { SmartHouse } from "./SmartHouse";
 import {AbstractDevice} from "./AbstractDevice";
 
 
-/*this code is needed to implement the work of a smartHouse using the browser console*/
-declare global {
-    interface Window {
-        sh: object;
-        DigitalWatch: Function;
-        Multicooker: Function;
-    }
-}
+const sh = new SmartHouse<AbstractDevice>();
+const dw1 = new DigitalWatch("panasonic");
+const mc1 = new Multicooker("redmond");
 
-window.sh = new SmartHouse<AbstractDevice>();
-window.DigitalWatch = DigitalWatch;
-window.Multicooker = Multicooker;
+sh.addDevice(dw1);
+sh.addDevice(mc1);
 
+console.log(sh.allDevices);
 
